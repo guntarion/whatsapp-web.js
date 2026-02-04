@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Greeting",
+    "message": "Hello {name}! Hope you're doing well today."
+  },
+  {
+    "id": 2,
+    "name": "Meeting Reminder",
+    "message": "Hi {name}, this is a reminder for our meeting tomorrow at 10 AM. Please confirm your attendance."
+  },
+  {
+    "id": 3,
+    "name": "Payment Reminder",
+    "message": "Dear {name}, this is a friendly reminder that your payment is due. Please process it at your earliest convenience. Thank you!"
+  },
+  {
+    "id": 4,
+    "name": "Thank You",
+    "message": "Thank you {name} for your support! We really appreciate it."
+  },
+  {
+    "id": 5,
+    "name": "Promotion",
+    "message": "Hi {name}! We have an exclusive offer just for you. Get 20% off on all products this week. Don't miss out!"
+  }
+]
