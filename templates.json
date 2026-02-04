@@ -22,7 +22,7 @@
   {
     "id": 5,
     "name": "Info Pengambilan Race Pack",
-    "message": "Assalamualaikum {pendaftar},\n\nRace pack untuk *Run Madan 2026* sudah bisa diambil.\n\nNo Registrasi: {noreg}\n\nLokasi: [Lokasi pengambilan]\nWaktu: [Waktu pengambilan]\n\nMohon membawa bukti pendaftaran.\n\nTerima kasih."
+    "message": "Assalamualaikum {pendaftar},\n\n*PENGAMBILAN RACE PACK RUN MADAN 2026*\nUntuk Peserta yang Sudah Terdaftar atas nama *{name}*\n\n📅 *Waktu Pengambilan*\nSabtu, 7 Februari 2026\n🕘 09.00 - 13.00 WIB\n\n📍 *Lokasi Pengambilan*\nKantor Sekretariat Yayasan Al Muhajirin Rewwin\nJl. Rajawali No.207, Ngeni, Kepuhkiriman, Kec. Waru, Kabupaten Sidoarjo, Jawa Timur 61256\n\n⚠️ *WAJIB DIBAWA:*\n• KTP / Kartu Identitas (atau kartu pengenal sejenis)\n• Bukti Pendaftaran (screenshot / nomor registrasi)\n\nNo Registrasi: *{noreg}*\n\nMohon datang tepat waktu. Terima kasih.\n\nPanitia Run Madan 2026"
   },
   {
     "id": 6,
@@ -38,5 +38,10 @@
     "id": 8,
     "name": "Ucapan Terima Kasih",
     "message": "Assalamualaikum {name},\n\nTerima kasih telah berpartisipasi dalam *Run Madan 2026*!\n\nSemoga acara ini membawa manfaat dan kebahagiaan. Sampai jumpa di acara berikutnya!\n\nSalam sehat,\nPanitia Run Madan 2026"
+  },
+  {
+    "id": 9,
+    "name": "Info Jadwal Hari-H Running 3K",
+    "message": "Assalamualaikum {pendaftar},\n\n*INFORMASI PENTING - RUN MADAN 2026*\nPeserta Running/Walking 3K atas nama *{name}*\n\n🏃 *Jadwal Hari-H:*\n\n⏰ *Pukul 05.30 WIB* - Hadir di lokasi\n(Untuk registrasi ulang & pemanasan bersama)\n\n🚀 *Pukul 06.30 WIB* - Start lari/jalan\n\nMohon hadir tepat waktu agar tidak ketinggalan sesi pemanasan yang penting untuk menghindari cedera.\n\n📍 *Lokasi:*\nLapangan Masjid Al Muhajirin Rewwin\n\nNo Registrasi: *{noreg}*\n\nSampai jumpa di hari-H!\n\nPanitia Run Madan 2026"
   }
 ]
