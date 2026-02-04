@@ -99,6 +99,36 @@ app.post('/api/send', async (req, res) => {
     }
 });
 
+// Store for tracking bulk send progress
+let bulkSendProgress = {
+    isRunning: false,
+    total: 0,
+    sent: 0,
+    currentContact: null,
+    results: [],
+    nextSendIn: 0
+};
+
+// Get random delay between min and max seconds
+function getRandomDelay(minSec = 5, maxSec = 12) {
+    return Math.floor(Math.random() * (maxSec - minSec + 1) + minSec) * 1000;
+}
+
+// Get bulk send progress
+app.get('/api/send-progress', (req, res) => {
+    res.json(bulkSendProgress);
+});
+
+// Cancel bulk send
+app.post('/api/send-cancel', (req, res) => {
+    if (bulkSendProgress.isRunning) {
+        bulkSendProgress.isRunning = false;
+        res.json({ success: true, message: 'Bulk send cancelled' });
+    } else {
+        res.json({ success: false, message: 'No bulk send in progress' });
+    }
+});
+
 // Send message to multiple contacts (bulk)
 app.post('/api/send-bulk', async (req, res) => {
     const { contactIds, message } = req.body;
@@ -111,45 +141,97 @@ app.post('/api/send-bulk', async (req, res) => {
         return res.json({ success: false, error: 'Contact IDs and message are required' });
     }
 
-    const results = [];
+    if (bulkSendProgress.isRunning) {
+        return res.json({ success: false, error: 'Bulk send already in progress' });
+    }
 
+    // Initialize progress
+    bulkSendProgress = {
+        isRunning: true,
+        total: contactIds.length,
+        sent: 0,
+        currentContact: null,
+        results: [],
+        nextSendIn: 0
+    };
+
+    // Send response immediately, process in background
+    res.json({ success: true, message: 'Bulk send started', total: contactIds.length });
+
+    // Process messages in background
     for (const contactId of contactIds) {
+        // Check if cancelled
+        if (!bulkSendProgress.isRunning) {
+            console.log('Bulk send cancelled by user');
+            break;
+        }
+
         const contact = contacts.find(c => c.id === contactId);
 
         if (!contact) {
-            results.push({ contactId, success: false, error: 'Contact not found' });
+            bulkSendProgress.results.push({ contactId, success: false, error: 'Contact not found' });
+            bulkSendProgress.sent++;
             continue;
         }
 
+        // Get display name based on category
+        const name = contact.namaPeserta || contact.namaTenant || contact.namaPenanggungJawab || 'Bapak/Ibu';
+        const pendaftar = contact.namaPendaftar || contact.namaPenanggungJawab || name;
+        const noReg = contact.noRegistrasi || '';
+
+        bulkSendProgress.currentContact = { name, phone: contact.phone };
+
         try {
             const chatId = `${contact.phone}@c.us`;
-            const finalMessage = message.replace(/{name}/g, contact.name);
+
+            // Replace all placeholders
+            const finalMessage = message
+                .replace(/{name}/g, name)
+                .replace(/{pendaftar}/g, pendaftar)
+                .replace(/{noreg}/g, noReg);
 
             await client.sendMessage(chatId, finalMessage);
 
-            console.log(`Message sent to ${contact.name} (${contact.phone})`);
-            results.push({
+            console.log(`[${bulkSendProgress.sent + 1}/${bulkSendProgress.total}] Sent to ${name} (${contact.phone})`);
+            bulkSendProgress.results.push({
                 contactId,
-                name: contact.name,
+                name: name,
                 phone: contact.phone,
                 success: true
             });
-
-            // Small delay between messages to avoid rate limiting
-            await new Promise(resolve => setTimeout(resolve, 1000));
         } catch (error) {
-            console.error(`Failed to send to ${contact.name}:`, error.message);
-            results.push({
+            console.error(`Failed to send to ${name}:`, error.message);
+            bulkSendProgress.results.push({
                 contactId,
-                name: contact.name,
+                name: name,
                 phone: contact.phone,
                 success: false,
                 error: error.message
             });
         }
+
+        bulkSendProgress.sent++;
+
+        // Random delay between 5-12 seconds before next message (if not last)
+        if (bulkSendProgress.sent < bulkSendProgress.total && bulkSendProgress.isRunning) {
+            const delay = getRandomDelay(5, 12);
+            bulkSendProgress.nextSendIn = delay;
+            console.log(`Waiting ${delay / 1000}s before next message...`);
+
+            // Countdown the delay
+            const startTime = Date.now();
+            while (Date.now() - startTime < delay) {
+                if (!bulkSendProgress.isRunning) break;
+                bulkSendProgress.nextSendIn = delay - (Date.now() - startTime);
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
     }
 
-    res.json({ results });
+    bulkSendProgress.isRunning = false;
+    bulkSendProgress.currentContact = null;
+    bulkSendProgress.nextSendIn = 0;
+    console.log('Bulk send completed');
 });
 
 // ============ START SERVER ============

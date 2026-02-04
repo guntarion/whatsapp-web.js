@@ -1,27 +1,42 @@
 [
   {
     "id": 1,
-    "name": "Greeting",
-    "message": "Hello {name}! Hope you're doing well today."
+    "name": "Konfirmasi Pendaftaran Running",
+    "message": "Assalamualaikum {name},\n\nTerima kasih telah mendaftar di acara *Run Madan 2026*.\n\nNo Registrasi: {noreg}\nNama Pendaftar: {pendaftar}\n\nMohon segera melakukan pembayaran untuk mengkonfirmasi keikutsertaan Anda.\n\nTerima kasih."
   },
   {
     "id": 2,
-    "name": "Meeting Reminder",
-    "message": "Hi {name}, this is a reminder for our meeting tomorrow at 10 AM. Please confirm your attendance."
+    "name": "Pengingat Pembayaran",
+    "message": "Assalamualaikum {pendaftar},\n\nIni adalah pengingat untuk segera menyelesaikan pembayaran pendaftaran *Run Madan 2026*.\n\nNo Registrasi: {noreg}\n\nJika sudah melakukan pembayaran, mohon abaikan pesan ini.\n\nTerima kasih."
   },
   {
     "id": 3,
-    "name": "Payment Reminder",
-    "message": "Dear {name}, this is a friendly reminder that your payment is due. Please process it at your earliest convenience. Thank you!"
+    "name": "Konfirmasi Pembayaran Lunas",
+    "message": "Assalamualaikum {pendaftar},\n\nPembayaran Anda untuk *Run Madan 2026* telah kami terima.\n\nNo Registrasi: {noreg}\nPeserta: {name}\n\nSampai jumpa di hari H!\n\nTerima kasih."
   },
   {
     "id": 4,
-    "name": "Thank You",
-    "message": "Thank you {name} for your support! We really appreciate it."
+    "name": "Pengingat H-1 Acara",
+    "message": "Assalamualaikum {name},\n\n*PENGINGAT: Run Madan 2026 BESOK!*\n\nJangan lupa:\n- Datang tepat waktu\n- Bawa kartu identitas\n- Gunakan pakaian olahraga\n- Jaga kesehatan\n\nSampai jumpa besok!\n\nPanitia Run Madan 2026"
   },
   {
     "id": 5,
-    "name": "Promotion",
-    "message": "Hi {name}! We have an exclusive offer just for you. Get 20% off on all products this week. Don't miss out!"
+    "name": "Info Pengambilan Race Pack",
+    "message": "Assalamualaikum {pendaftar},\n\nRace pack untuk *Run Madan 2026* sudah bisa diambil.\n\nNo Registrasi: {noreg}\n\nLokasi: [Lokasi pengambilan]\nWaktu: [Waktu pengambilan]\n\nMohon membawa bukti pendaftaran.\n\nTerima kasih."
+  },
+  {
+    "id": 6,
+    "name": "Konfirmasi Senam Sehat",
+    "message": "Assalamualaikum {name},\n\nTerima kasih telah mendaftar *Senam Sehat Run Madan 2026*.\n\nNo Registrasi: {noreg}\nNama Pendaftar: {pendaftar}\n\nSampai jumpa di acara!\n\nTerima kasih."
+  },
+  {
+    "id": 7,
+    "name": "Info Tenant",
+    "message": "Assalamualaikum {pendaftar},\n\nTerima kasih atas partisipasi Anda sebagai *Tenant di Run Madan 2026*.\n\nNo Registrasi: {noreg}\n\nInformasi lebih lanjut akan kami sampaikan segera.\n\nTerima kasih."
+  },
+  {
+    "id": 8,
+    "name": "Ucapan Terima Kasih",
+    "message": "Assalamualaikum {name},\n\nTerima kasih telah berpartisipasi dalam *Run Madan 2026*!\n\nSemoga acara ini membawa manfaat dan kebahagiaan. Sampai jumpa di acara berikutnya!\n\nSalam sehat,\nPanitia Run Madan 2026"
   }
 ]

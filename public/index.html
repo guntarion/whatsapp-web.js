@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Bulk Sender</title>
+    <title>WhatsApp Bulk Sender - Run Madan 2026</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,7 +11,7 @@
         }
 
         body {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background: #f0f2f5;
@@ -20,6 +20,13 @@
         h1 {
             color: #075e54;
             text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
         }
 
         .status-bar {
@@ -49,7 +56,7 @@
             gap: 20px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .container {
                 grid-template-columns: 1fr;
             }
@@ -70,14 +77,67 @@
             padding-bottom: 10px;
         }
 
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            background: #fff;
+        }
+
+        .tab:hover {
+            border-color: #075e54;
+        }
+
+        .tab.active {
+            background: #075e54;
+            color: white;
+            border-color: #075e54;
+        }
+
+        .tab .count {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 11px;
+            margin-left: 5px;
+        }
+
+        .tab.active .count {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #075e54;
+        }
+
         .contact-list {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
         }
 
         .contact-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             padding: 10px;
             border-bottom: 1px solid #eee;
             gap: 10px;
@@ -91,6 +151,7 @@
             width: 18px;
             height: 18px;
             cursor: pointer;
+            margin-top: 3px;
         }
 
         .contact-info {
@@ -99,18 +160,37 @@
 
         .contact-name {
             font-weight: 500;
+            font-size: 14px;
         }
 
-        .contact-phone {
+        .contact-detail {
             font-size: 12px;
             color: #666;
+            margin-top: 2px;
         }
+
+        .contact-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 500;
+            margin-right: 5px;
+        }
+
+        .badge-running { background: #e3f2fd; color: #1976d2; }
+        .badge-senam { background: #f3e5f5; color: #7b1fa2; }
+        .badge-tenant { background: #fff3e0; color: #f57c00; }
+        .badge-lunas { background: #e8f5e9; color: #388e3c; }
+        .badge-belum { background: #ffebee; color: #d32f2f; }
 
         .template-list {
             display: flex;
             flex-direction: column;
             gap: 8px;
             margin-bottom: 15px;
+            max-height: 200px;
+            overflow-y: auto;
         }
 
         .template-item {
@@ -139,11 +219,12 @@
             font-size: 12px;
             color: #666;
             margin-top: 5px;
+            white-space: pre-wrap;
         }
 
         textarea {
             width: 100%;
-            height: 120px;
+            height: 150px;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 6px;
@@ -185,12 +266,15 @@
         .btn-secondary {
             background: #f5f5f5;
             color: #333;
+            padding: 8px 12px;
+            font-size: 12px;
         }
 
         .actions {
             display: flex;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .results {
@@ -250,10 +334,207 @@
             padding: 20px;
             color: #666;
         }
+
+        .no-phone {
+            opacity: 0.5;
+        }
+
+        .placeholder-help {
+            background: #fff8e1;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .placeholder-help code {
+            background: #ffecb3;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .progress-panel {
+            margin-top: 20px;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #075e54, #25d366);
+            height: 100%;
+            transition: width 0.3s;
+            border-radius: 10px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .progress-current {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .progress-current .name {
+            font-weight: 500;
+        }
+
+        .progress-current .phone {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .countdown {
+            background: #fff3e0;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .countdown .time {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f57c00;
+        }
+
+        .btn-cancel {
+            background: #f44336;
+            color: white;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-cancel:hover {
+            background: #d32f2f;
+        }
+
+        .live-results {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+        }
+
+        .live-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .live-result-item.success {
+            background: #e8f5e9;
+        }
+
+        .live-result-item.failed {
+            background: #ffebee;
+        }
+
+        .live-result-item.pending {
+            background: #f5f5f5;
+            color: #999;
+        }
+
+        .live-result-item.sending {
+            background: #e3f2fd;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .result-number {
+            background: #075e54;
+            color: white;
+            min-width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .live-result-item.pending .result-number {
+            background: #ccc;
+        }
+
+        .live-result-item.sending .result-number {
+            background: #1976d2;
+        }
+
+        .live-result-item.failed .result-number {
+            background: #f44336;
+        }
+
+        .result-info {
+            flex: 1;
+        }
+
+        .result-name {
+            font-weight: 500;
+        }
+
+        .result-phone {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .result-status {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .result-status.success { color: #388e3c; }
+        .result-status.failed { color: #d32f2f; }
+        .result-status.pending { color: #999; }
+        .result-status.sending { color: #1976d2; }
+
+        .results-header {
+            padding: 10px;
+            background: #f5f5f5;
+            font-weight: 500;
+            font-size: 13px;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+        }
+
+        .cancelled-notice {
+            background: #fff3e0;
+            border: 1px solid #ffb74d;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
     <h1>WhatsApp Bulk Sender</h1>
+    <p class="subtitle">Run Madan 2026 - Participant Messaging</p>
 
     <div class="status-bar">
         <div class="status-indicator" id="statusIndicator"></div>
@@ -263,11 +544,24 @@
     <div class="container">
         <div class="panel">
             <h2>Contacts</h2>
-            <div class="actions">
-                <button class="btn btn-secondary" onclick="selectAll()">Select All</button>
-                <button class="btn btn-secondary" onclick="deselectAll()">Deselect All</button>
+
+            <div class="tabs" id="categoryTabs">
+                <div class="tab active" data-category="all">All <span class="count">0</span></div>
+                <div class="tab" data-category="running">Running <span class="count">0</span></div>
+                <div class="tab" data-category="senam">Senam <span class="count">0</span></div>
+                <div class="tab" data-category="tenant">Tenant <span class="count">0</span></div>
             </div>
+
+            <input type="text" class="search-box" id="searchBox" placeholder="Search by name, phone, or registration...">
+
+            <div class="actions">
+                <button class="btn btn-secondary" onclick="selectAll()">Select All Visible</button>
+                <button class="btn btn-secondary" onclick="deselectAll()">Deselect All</button>
+                <button class="btn btn-secondary" onclick="selectLunas()">Select Lunas Only</button>
+            </div>
+
             <div class="selected-count">Selected: <span id="selectedCount">0</span> contacts</div>
+
             <div class="contact-list" id="contactList">
                 <div class="loading">Loading contacts...</div>
             </div>
@@ -280,13 +574,43 @@
             </div>
 
             <h2>Message</h2>
-            <textarea id="messageInput" placeholder="Select a template or type your message here...&#10;&#10;Use {name} to insert contact name."></textarea>
-            <p class="hint">Use {name} to personalize with contact's name</p>
+            <div class="placeholder-help">
+                <strong>Placeholders:</strong>
+                <code>{name}</code> = Participant name,
+                <code>{pendaftar}</code> = Registrant name,
+                <code>{noreg}</code> = Registration number
+            </div>
+            <textarea id="messageInput" placeholder="Select a template or type your message here..."></textarea>
 
             <button class="btn btn-primary" id="sendBtn" onclick="sendMessages()" disabled>
                 Send Messages
             </button>
         </div>
+    </div>
+
+    <div class="panel progress-panel" id="progressPanel" style="display: none;">
+        <h2 id="progressTitle">Sending Messages...</h2>
+        <div class="progress-info">
+            <span>Progress: <strong id="progressCount">0/0</strong></span>
+            <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        <div class="countdown" id="countdownBox" style="display: none;">
+            <div>Next message in:</div>
+            <div class="time" id="countdownTime">0</div>
+            <div style="font-size: 11px; color: #666; margin-top: 5px;">Random delay to avoid spam detection</div>
+        </div>
+        <div id="cancelledNotice" class="cancelled-notice" style="display: none;">
+            <strong>Sending Cancelled!</strong> Check the list below to see which messages were sent and which are still pending.
+        </div>
+        <div class="live-results" id="liveResults">
+            <div class="results-header">
+                <span id="resultsHeaderText">Queue</span>
+            </div>
+        </div>
+        <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSend()">Cancel Sending</button>
     </div>
 
     <div class="panel results" id="resultsPanel" style="display: none;">
@@ -299,13 +623,30 @@
         let templates = [];
         let selectedContacts = new Set();
         let clientReady = false;
+        let currentCategory = 'all';
+        let searchTerm = '';
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             loadData();
             checkStatus();
-            // Check status every 5 seconds
             setInterval(checkStatus, 5000);
+
+            // Category tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentCategory = tab.dataset.category;
+                    renderContacts();
+                });
+            });
+
+            // Search
+            document.getElementById('searchBox').addEventListener('input', (e) => {
+                searchTerm = e.target.value.toLowerCase();
+                renderContacts();
+            });
         });
 
         async function checkStatus() {
@@ -344,6 +685,7 @@
                 contacts = await contactsRes.json();
                 templates = await templatesRes.json();
 
+                updateCategoryCounts();
                 renderContacts();
                 renderTemplates();
             } catch (error) {
@@ -351,18 +693,97 @@
             }
         }
 
+        function updateCategoryCounts() {
+            const counts = { all: contacts.length };
+            contacts.forEach(c => {
+                counts[c.category] = (counts[c.category] || 0) + 1;
+            });
+
+            document.querySelectorAll('.tab').forEach(tab => {
+                const cat = tab.dataset.category;
+                const countEl = tab.querySelector('.count');
+                if (countEl) {
+                    countEl.textContent = counts[cat] || 0;
+                }
+            });
+        }
+
+        function getFilteredContacts() {
+            return contacts.filter(contact => {
+                // Category filter
+                if (currentCategory !== 'all' && contact.category !== currentCategory) {
+                    return false;
+                }
+
+                // Search filter
+                if (searchTerm) {
+                    const searchFields = [
+                        contact.namaPeserta,
+                        contact.namaPendaftar,
+                        contact.namaTenant,
+                        contact.namaPenanggungJawab,
+                        contact.phone,
+                        contact.noRegistrasi,
+                        contact.noBib
+                    ].filter(Boolean).join(' ').toLowerCase();
+
+                    if (!searchFields.includes(searchTerm)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+        }
+
         function renderContacts() {
             const list = document.getElementById('contactList');
-            list.innerHTML = contacts.map(contact => `
-                <div class="contact-item">
-                    <input type="checkbox" id="contact-${contact.id}"
-                           onchange="toggleContact(${contact.id})">
-                    <div class="contact-info">
-                        <div class="contact-name">${contact.name}</div>
-                        <div class="contact-phone">+${contact.phone}</div>
+            const filtered = getFilteredContacts();
+
+            if (filtered.length === 0) {
+                list.innerHTML = '<div class="loading">No contacts found</div>';
+                return;
+            }
+
+            list.innerHTML = filtered.map(contact => {
+                const name = contact.namaPeserta || contact.namaTenant || contact.namaPenanggungJawab || 'Unknown';
+                const hasPhone = contact.phone && contact.phone.length >= 10;
+
+                let details = '';
+                let badges = '';
+
+                // Category badge
+                badges += `<span class="contact-badge badge-${contact.category}">${contact.category}</span>`;
+
+                // Status badge
+                if (contact.statusPembayaran) {
+                    const isLunas = contact.statusPembayaran.toLowerCase() === 'lunas';
+                    badges += `<span class="contact-badge ${isLunas ? 'badge-lunas' : 'badge-belum'}">${contact.statusPembayaran}</span>`;
+                }
+
+                if (contact.category === 'running') {
+                    details = `${contact.noRegistrasi || ''} | ${contact.namaPendaftar || ''} | +${contact.phone || 'No phone'}`;
+                    if (contact.noBib) details += ` | BIB: ${contact.noBib}`;
+                } else if (contact.category === 'senam') {
+                    details = `${contact.noRegistrasi || ''} | ${contact.namaPendaftar || ''} | +${contact.phone || 'No phone'}`;
+                } else if (contact.category === 'tenant') {
+                    details = `${contact.noRegistrasi || ''} | ${contact.namaPenanggungJawab || ''} | +${contact.phone || 'No phone'}`;
+                    if (contact.jenisProduk) details += ` | ${contact.jenisProduk}`;
+                }
+
+                return `
+                    <div class="contact-item ${hasPhone ? '' : 'no-phone'}">
+                        <input type="checkbox" id="contact-${contact.id}"
+                               ${hasPhone ? '' : 'disabled'}
+                               ${selectedContacts.has(contact.id) ? 'checked' : ''}
+                               onchange="toggleContact(${contact.id})">
+                        <div class="contact-info">
+                            <div class="contact-name">${badges}${name}</div>
+                            <div class="contact-detail">${details}</div>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function renderTemplates() {
@@ -371,7 +792,7 @@
                 <div class="template-item" id="template-${template.id}"
                      onclick="selectTemplate(${template.id})">
                     <div class="template-name">${template.name}</div>
-                    <div class="template-preview">${template.message.substring(0, 60)}...</div>
+                    <div class="template-preview">${template.message.substring(0, 100)}${template.message.length > 100 ? '...' : ''}</div>
                 </div>
             `).join('');
         }
@@ -387,19 +808,33 @@
         }
 
         function selectAll() {
-            contacts.forEach(c => {
-                selectedContacts.add(c.id);
-                document.getElementById(`contact-${c.id}`).checked = true;
+            const filtered = getFilteredContacts();
+            filtered.forEach(c => {
+                if (c.phone && c.phone.length >= 10) {
+                    selectedContacts.add(c.id);
+                }
             });
+            renderContacts();
             updateSelectedCount();
             updateSendButton();
         }
 
         function deselectAll() {
             selectedContacts.clear();
-            contacts.forEach(c => {
-                document.getElementById(`contact-${c.id}`).checked = false;
+            renderContacts();
+            updateSelectedCount();
+            updateSendButton();
+        }
+
+        function selectLunas() {
+            const filtered = getFilteredContacts();
+            filtered.forEach(c => {
+                if (c.phone && c.phone.length >= 10 &&
+                    c.statusPembayaran && c.statusPembayaran.toLowerCase() === 'lunas') {
+                    selectedContacts.add(c.id);
+                }
             });
+            renderContacts();
             updateSelectedCount();
             updateSendButton();
         }
@@ -409,15 +844,11 @@
         }
 
         function selectTemplate(id) {
-            // Remove selected class from all
             templates.forEach(t => {
                 document.getElementById(`template-${t.id}`).classList.remove('selected');
             });
-
-            // Add selected class to clicked one
             document.getElementById(`template-${id}`).classList.add('selected');
 
-            // Set message
             const template = templates.find(t => t.id === id);
             document.getElementById('messageInput').value = template.message;
             updateSendButton();
@@ -442,8 +873,11 @@
             }
         }
 
-        // Listen for message input changes
         document.getElementById('messageInput').addEventListener('input', updateSendButton);
+
+        let progressInterval = null;
+        let sendQueue = []; // Full queue of contacts to send
+        let wasCancelled = false;
 
         async function sendMessages() {
             const btn = document.getElementById('sendBtn');
@@ -451,7 +885,26 @@
             const contactIds = Array.from(selectedContacts);
 
             btn.disabled = true;
-            btn.textContent = 'Sending...';
+            btn.textContent = 'Starting...';
+            wasCancelled = false;
+
+            // Build queue with contact details
+            sendQueue = contactIds.map((id, index) => {
+                const contact = contacts.find(c => c.id === id);
+                const name = contact ? (contact.namaPeserta || contact.namaTenant || contact.namaPenanggungJawab || 'Unknown') : 'Unknown';
+                const phone = contact ? contact.phone : '';
+                return { id, name, phone, status: 'pending', order: index + 1 };
+            });
+
+            // Hide results panel, show progress panel
+            document.getElementById('resultsPanel').style.display = 'none';
+            document.getElementById('progressPanel').style.display = 'block';
+            document.getElementById('cancelledNotice').style.display = 'none';
+            document.getElementById('cancelBtn').style.display = 'block';
+            document.getElementById('progressTitle').textContent = 'Sending Messages...';
+
+            // Render initial queue
+            renderQueue();
 
             try {
                 const res = await fetch('/api/send-bulk', {
@@ -461,13 +914,169 @@
                 });
 
                 const data = await res.json();
-                showResults(data.results);
+
+                if (data.success) {
+                    // Start polling for progress
+                    startProgressPolling();
+                } else {
+                    alert('Failed to start: ' + data.error);
+                    document.getElementById('progressPanel').style.display = 'none';
+                    updateSendButton();
+                }
             } catch (error) {
                 console.error('Send failed:', error);
                 alert('Failed to send messages: ' + error.message);
+                document.getElementById('progressPanel').style.display = 'none';
+                updateSendButton();
+            }
+        }
+
+        function renderQueue() {
+            const liveResults = document.getElementById('liveResults');
+            const successCount = sendQueue.filter(q => q.status === 'success').length;
+            const failedCount = sendQueue.filter(q => q.status === 'failed').length;
+            const pendingCount = sendQueue.filter(q => q.status === 'pending').length;
+
+            let headerText = `Sent: ${successCount}`;
+            if (failedCount > 0) headerText += ` | Failed: ${failedCount}`;
+            if (pendingCount > 0) headerText += ` | Pending: ${pendingCount}`;
+            document.getElementById('resultsHeaderText').textContent = headerText;
+
+            liveResults.innerHTML = `
+                <div class="results-header">
+                    <span id="resultsHeaderText">${headerText}</span>
+                </div>
+                ${sendQueue.map(q => `
+                    <div class="live-result-item ${q.status}">
+                        <div class="result-number">${q.order}</div>
+                        <div class="result-info">
+                            <div class="result-name">${q.name}</div>
+                            <div class="result-phone">+${q.phone || 'No phone'}</div>
+                        </div>
+                        <div class="result-status ${q.status}">
+                            ${q.status === 'success' ? '✓ Sent' :
+                              q.status === 'failed' ? '✗ Failed' :
+                              q.status === 'sending' ? '⟳ Sending...' :
+                              '○ Pending'}
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        function startProgressPolling() {
+            // Poll every 500ms
+            progressInterval = setInterval(async () => {
+                try {
+                    const res = await fetch('/api/send-progress');
+                    const progress = await res.json();
+
+                    updateProgressUI(progress);
+
+                    // Stop polling when done
+                    if (!progress.isRunning && progress.sent > 0) {
+                        clearInterval(progressInterval);
+                        progressInterval = null;
+                        onSendComplete(progress);
+                    }
+                } catch (error) {
+                    console.error('Progress poll failed:', error);
+                }
+            }, 500);
+        }
+
+        function updateProgressUI(progress) {
+            const percent = progress.total > 0 ? Math.round((progress.sent / progress.total) * 100) : 0;
+
+            document.getElementById('progressCount').textContent = `${progress.sent}/${progress.total}`;
+            document.getElementById('progressPercent').textContent = `${percent}%`;
+            document.getElementById('progressBar').style.width = `${percent}%`;
+
+            // Update queue status from results
+            progress.results.forEach((r, index) => {
+                if (sendQueue[index]) {
+                    sendQueue[index].status = r.success ? 'success' : 'failed';
+                }
+            });
+
+            // Mark current as sending
+            if (progress.currentContact && progress.sent < sendQueue.length) {
+                // Reset any previous "sending" status
+                sendQueue.forEach(q => {
+                    if (q.status === 'sending') q.status = 'pending';
+                });
+                // Mark current
+                if (sendQueue[progress.sent]) {
+                    sendQueue[progress.sent].status = 'sending';
+                }
             }
 
+            // Render updated queue
+            renderQueue();
+
+            // Countdown
+            const countdownBox = document.getElementById('countdownBox');
+            if (progress.nextSendIn > 0) {
+                countdownBox.style.display = 'block';
+                document.getElementById('countdownTime').textContent = Math.ceil(progress.nextSendIn / 1000) + 's';
+            } else {
+                countdownBox.style.display = 'none';
+            }
+
+            // Auto scroll to current item
+            const liveResults = document.getElementById('liveResults');
+            const currentIndex = progress.sent;
+            const items = liveResults.querySelectorAll('.live-result-item');
+            if (items[currentIndex]) {
+                items[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        async function cancelSend() {
+            if (confirm('Are you sure you want to cancel sending?\n\nMessages already sent cannot be undone.')) {
+                try {
+                    await fetch('/api/send-cancel', { method: 'POST' });
+                    wasCancelled = true;
+                } catch (error) {
+                    console.error('Cancel failed:', error);
+                }
+            }
+        }
+
+        function onSendComplete(progress) {
+            // Update final status
+            progress.results.forEach((r, index) => {
+                if (sendQueue[index]) {
+                    sendQueue[index].status = r.success ? 'success' : 'failed';
+                }
+            });
+
+            // Check if cancelled (some still pending)
+            const pendingCount = sendQueue.filter(q => q.status === 'pending' || q.status === 'sending').length;
+            wasCancelled = pendingCount > 0;
+
+            // Reset any "sending" to "pending"
+            sendQueue.forEach(q => {
+                if (q.status === 'sending') q.status = 'pending';
+            });
+
+            // Update UI
+            renderQueue();
+            document.getElementById('countdownBox').style.display = 'none';
+            document.getElementById('cancelBtn').style.display = 'none';
+
+            if (wasCancelled) {
+                document.getElementById('progressTitle').textContent = 'Sending Cancelled';
+                document.getElementById('cancelledNotice').style.display = 'block';
+            } else {
+                document.getElementById('progressTitle').textContent = 'Sending Complete!';
+            }
+
+            // Re-enable send button
             updateSendButton();
+
+            // Clear selection
+            deselectAll();
         }
 
         function showResults(results) {
@@ -494,7 +1103,6 @@
                 `).join('')}
             `;
 
-            // Scroll to results
             panel.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
